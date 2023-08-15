@@ -1,0 +1,37 @@
+<section class="card">
+    {{!-- < href="/blogs/{{id}}"> --}}
+        <h3>{{name}}</h3>
+        <br>
+        <p>{{description}}</p>
+        <p>Date Created: {{ format_date date_created}}</p>
+        <p> Post By: {{user.name}}</p>
+</section>
+
+<section>
+    <ul id="comments-list">
+        <!-- Comments will be added here dynamically -->
+    </ul>
+</section>
+
+{{#if logged_in}}
+<form class="new-comment-form" data-blog_id={{id}}>
+    <div>
+        <label for="comment">Comment</label>
+        <input type="text" id="comment" placeholder="Type your comment here" />
+        <button id="submit-comment">Submit</button>
+</form>
+{{else}}
+<a href="/login">Log in</a>
+{{/if}}
+
+<h2>Comments</h2>
+
+{{#each comments as |comment|}}
+<section class="card">
+    <p>{{comment.text}}</p>
+    <p>{{comment.user.name}} {{format_date date_created}}</p>
+</section>
+{{/each}}
+
+
+<script src="/js/comments.js"></script>
